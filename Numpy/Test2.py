@@ -9,5 +9,5 @@ if __name__ == "__main__":
     brr = np.tile(range(8), [4,1])
     print 'brr:\n', brr
 
-    crr = np.stack(arr[:],axis=1)
+    crr = np.stack(arr,axis=1)
     print 'crr:\n', crr
