@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     # trace = trace(dot)
 
-    b = np.array([[6],[6],[6]])
+    b = np.array([[6], [6], [6]])
     solve = solve(dot, b)
     print 'solve : ', solve
 

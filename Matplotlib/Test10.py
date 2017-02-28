@@ -1,9 +1,17 @@
-from matplotlib import cm
-from matplotlib.ticker import LinearLocator
 import matplotlib.pyplot as plt
-import numpy as np
+
+def drawCurve(Reagentperday, CurrentLevel) :
+    RegentLevel = []
+    for i in range(15):
+        RegentLevel.append(CurrentLevel)
+        CurrentLevel = CurrentLevel * 0.5 + Reagentperday
+    Time = [i for i in range(15)]
+    print(Time, RegentLevel)
+    plt.title('Reagentperday: %s CurrentLevel: %s ' % (Reagentperday, CurrentLevel))
+    plt.plot(Time, RegentLevel)
 
 if __name__ == '__main__':
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    # [X, Y] = np.meshgrid(np.linspace(0.01,0.01,1),0.01:0.01:1)
+    # for k in range(1, 10):
+    for i in range(1, 4):
+        drawCurve(1, i)
+    plt.show()
