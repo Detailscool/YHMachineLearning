@@ -30,5 +30,3 @@ if __name__ == '__main__':
     factor = amount * (665 - amount)
     f = np.polyfit(factor, delta, 1)
     print f
-
-
