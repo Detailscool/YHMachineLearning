@@ -77,7 +77,7 @@ if __name__ == '__main__':
     plt.title(u'鸢尾花数据的决策树分类', fontsize=17)
     plt.show()
 
-    y_test = y_test.reshape(-1)
+    y_test = y_test.ravel()
     depth = np.arange(1, 15)
     err_list = []
     criterion = ['gini', 'entropy']
