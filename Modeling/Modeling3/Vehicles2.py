@@ -5,7 +5,6 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pandas as pd
-from functools import reduce
 
 if __name__ == '__main__':
     mpl.rcParams['font.sans-serif'] = [u'SimHei']
@@ -23,14 +22,10 @@ if __name__ == '__main__':
         # print name[0]
         if name[0] not in unique_make :
             unique_make.append(name[0])
-        # unique_make.append(pd.unique(name[0]))
-    # unique_make = set(unique_make)
-    # unique_make = reduce(set.intersection, unique_make)
 
     print unique_make
 
     averageed = grouped['comb08', 'highway08', 'city08'].mean()
-    # averageed.comb08.astype('float')
     averageed = averageed.reset_index()
     print averageed, type(averageed)
 
@@ -50,13 +45,13 @@ if __name__ == '__main__':
                 plt.plot(x, datas.comb08)
                 # plt.ployfit
                 plt.scatter(x, datas.comb08)
-                plt.xticks(x, datas.year, rotation=90)
                 f = np.polyfit(x, datas.comb08, 9)
                 y = np.polyval(f, x)
                 plt.plot(x, y, color='r')
+                plt.xticks(x, datas.year, rotation=90)
                 plt.grid()
                 n += 1
-    # plt.tight_layout(2)
+    plt.tight_layout(2)
     plt.show()
 
 
