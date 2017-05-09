@@ -36,16 +36,16 @@ if __name__ == '__main__':
     model.fit(x_train, y_train)
     y_test_hat = model.predict(x_test)
 
-    # with open('iris.dot', 'w') as f:
-    #     tree.export_graphviz(model, out_file=f)
-    #
-    # dot_data = tree.export_graphviz(model, out_file=None, feature_names=iris_features_E, class_names=iris_class,
-    #                                 filled=True, rounded=True, special_characters=True)
-    # graph = pydotplus.graph_from_dot_data(dot_data)
-    # graph.write_pdf('iris.pdf')
-    # f = open('iris.png', 'wb')
-    # f.write(graph.create_png())
-    # f.close()
+    with open('iris.dot', 'w') as f:
+        tree.export_graphviz(model, out_file=f)
+
+    dot_data = tree.export_graphviz(model, out_file=None, feature_names=iris_features_E, class_names=iris_class,
+                                    filled=True, rounded=True, special_characters=True)
+    graph = pydotplus.graph_from_dot_data(dot_data)
+    graph.write_pdf('iris.pdf')
+    f = open('iris.png', 'wb')
+    f.write(graph.create_png())
+    f.close()
 
     N, M = 50, 50
     x1_min, x1_max = x[:, 0].min(), x[:, 0].max()
