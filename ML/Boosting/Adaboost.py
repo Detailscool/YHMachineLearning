@@ -15,6 +15,8 @@ if __name__ == '__main__':
     print X1.shape, '--', X2.shape
     X = np.concatenate((X1, X2))
     y = np.concatenate((y1, -y2+1))
+    print 'X:\n', X
+    print 'y:\n', y
 
     #基于单层决策树的Adaboost算法
     bst = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), algorithm='SAMME', n_estimators=200)
@@ -46,7 +48,7 @@ if __name__ == '__main__':
 
     #绘制分类柱状图
     twoclass_output = bst.decision_function(X)
-    print 'decision_function : \n', twoclass_output
+    print 'decision_function : \n', twoclass_output, type(twoclass_output)
     plot_range = (twoclass_output.min(), twoclass_output.max())
     plt.subplot(122)
     for i, n, c in zip(range(2), class_names, plot_colors):
