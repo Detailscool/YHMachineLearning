@@ -51,10 +51,11 @@ print x
 print y
 
 x = np.array(x, dtype=float)
+# x = x[:, 3]
 
 print 'Mean : ', np.mean(x), 'Standard Deviation : ', np.std(x)
 
-ntiles = 10
+ntiles = 4
 percent_boundary = []
 for i in range(ntiles+1):
     percent_boundary.append(np.percentile(x, i*100/ntiles))
