@@ -20,7 +20,7 @@ if __name__ == '__main__':
     X_train = data_train[np.arange(64)]
     y_train = data_train[64]
 
-    estimator = PCA(n_components=2) #将高维度特征向量（六十四维）压缩到两个维度的PCA
+    estimator = PCA(n_components=2)  # 将高维度特征向量（六十四维）压缩到两个维度的PCA
     X_pca = estimator.fit_transform(X_train)
 
     colors = ['black', 'blue', 'purple', 'yellow', 'white', 'red', 'lime', 'cyan', 'orange', 'gray']
@@ -37,13 +37,12 @@ if __name__ == '__main__':
     y_test = data_test[64]
 
     np.random.seed(0)
-
     svc = LinearSVC()
     svc.fit(X_train, y_train)
     y_hat = svc.predict(X_test)
     show_accuracy(y_hat, y_test, 'LinearSVC')
 
-    estimator = PCA(n_components=20)
+    estimator = PCA(n_components=30)
     X_pca_train = estimator.fit_transform(X_train)
     X_pca_test = estimator.transform(X_test)
 

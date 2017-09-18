@@ -8,6 +8,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import SGDClassifier
 
+pd.set_option('display.width', 1000)
+
 colum_name = ['Sample code number', 'Clump Thickness', 'Uniformity of Cell Size', 'Unifomity of Cell Shape', 'Marginal Adhesion', 'Single Epithelial Cell Size', 'Bare Nuclei', 'Bland Chromatin', 'Normal Nucleoli', 'Mitoses', 'Class']
 
 def show_accuracy(a, b, tip):
@@ -28,7 +30,7 @@ if __name__ == '__main__':
     print y_train.value_counts()
     print y_test.value_counts()
 
-    print x_train.info()
+    print 'x_train.info: \n', x_train.info()
 
     ss = StandardScaler()
     X_train = ss.fit_transform(x_train)

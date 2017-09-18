@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from sklearn.ensemble import RandomForestClassifier
 
-
 def iris_type(s):
     it = {'Iris-setosa': 0, 'Iris-versicolor': 1, 'Iris-virginica': 2}
     return it[s]
