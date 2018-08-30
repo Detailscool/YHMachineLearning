@@ -19,7 +19,7 @@ faces = dataset.data
 plt.axis('off')
 
 def ploy_gallery(title, images, n_col=n_col, n_row=n_row):
-    plt.figure(figsize=(2* n_col, 2.6*n_row))
+    plt.figure(figsize=(2*n_col, 2.6*n_row))
     plt.suptitle(title, size=16)
 
     for i, comp in enumerate(images):
