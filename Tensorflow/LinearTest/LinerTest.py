@@ -26,9 +26,7 @@ init_op = tf.global_variables_initializer()
 with tf.Session() as session:
     session.run(init_op)
 
-    file_writer = tf.summary.FileWriter('./tmp/summary', graph=session.graph)
-
-    print("第0次，权重:%f, 偏置:%f" % (weight.eval(), bias.eval()))
+    print("初始化权重:%f, 偏置:%f" % (weight.eval(), bias.eval()))
     for i in range(200):
         session.run(gradient_op)
         print("第%d次，权重:%f, 偏置:%f" % (i+1, weight.eval(), bias.eval()))

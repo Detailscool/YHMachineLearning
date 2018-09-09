@@ -4,7 +4,7 @@ greeting = tf.constant('Hello Google Tensorflow')
 
 session = tf.Session()
 result = session.run(greeting)
-print result
+print(result)
 
 session.close()
 
@@ -16,4 +16,4 @@ linear = tf.add(product, tf.constant(2.0))
 
 with tf.Session() as session:
     result = session.run(linear)
-    print result
+    print(result)
