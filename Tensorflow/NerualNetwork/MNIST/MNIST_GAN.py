@@ -102,9 +102,9 @@ with tf.Session() as sess:
 
     for e in range(epochs):
         for batch_i in range(mnist.train.num_examples//batch_size):
-            batch = mnist.train.next_batch(batch_size)
+            batch_img, batch_labels = mnist.train.next_batch(batch_size)
 
-            batch_images = batch[0].reshape(batch_size, 784)
+            batch_images = batch_img.reshape(batch_size, 784)
 
             batch_images = batch_images * 2 -1
 
