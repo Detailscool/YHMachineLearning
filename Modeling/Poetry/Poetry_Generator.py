@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # Poetry_Generator.py
 # Created by Henry on 2020/11/4
-# Description :TensorFlow 1.14.0rc1
+# Description :TensorFlow 1.13.1
 
 import numpy as np
 import pickle
@@ -65,9 +65,6 @@ def gen_poetry(prime_word='白', top_n=5, rule=7, sentence_lines=4, hidden_head=
     index = len (prime_word) if hidden_head == None else 1
     for n in range (gen_length):
         index += 1
-        predictions = model(dyn_input)
-
-        predictions = tf.squeeze(predictions, 0)
 
         if index != 0 and (index % (rule + 1)) == 0:
             if ((index / (rule + 1)) + 1) % 2 == 0:
@@ -75,13 +72,20 @@ def gen_poetry(prime_word='白', top_n=5, rule=7, sentence_lines=4, hidden_head=
             else:
                 predicted_id = vocab_to_int['。']
         else:
+            predictions = model(tf.constant(dyn_input))
+
+            predictions = tf.squeeze (predictions, 0)
+
+            a = predictions.eval ()
+
             if hidden_head != None and (index - 1) % (rule + 1) == 0 and (index - 1) // (rule + 1) < len (hidden_head):
                 predicted_id = vocab_to_int[hidden_head[(index - 1) // (rule + 1)]]
             else:
                 while True:
                     predictions = predictions / temperature
                     samples = tf.random.categorical(predictions, num_samples=1)
-                    predicted_id = samples.eval()[-1, 0]
+                    predicted_ids = samples.eval()
+                    predicted_id = predicted_ids[-1, 0]
 
                     # p = np.squeeze(predictions[-1].numpy())
                     # p[np.argsort(p)[:-top_n]] = 0
@@ -93,8 +97,8 @@ def gen_poetry(prime_word='白', top_n=5, rule=7, sentence_lines=4, hidden_head=
                         # using a multinomial distribution to predict the word returned by the model
                         #         predictions = predictions / temperature
                         #         predicted_id = tf.multinomial(predictions, num_samples=1)[-1,0].numpy()
-
-        dyn_input = np.expand_dims([predicted_id], 0)
+        combineid = dyn_input[-1].tolist() + [predicted_id]
+        dyn_input = np.expand_dims(combineid, 0)
         gen_sentences.append(int_to_vocab[predicted_id])
 
     poetry_script = ''.join(gen_sentences)
@@ -160,6 +164,8 @@ with tf.Session() as sess:
     if os.path.exists(model_dir):
         model_file = tf.train.latest_checkpoint(model_dir)
         saver.restore(sess, model_file)
+
+        print (gen_poetry (prime_word='白', top_n=10, rule=5, sentence_lines=4, hidden_head='小泉红叶'))
     else:
         file_writer = tf.summary.FileWriter('./tmp/summary_conv', graph=sess.graph)
 
@@ -190,7 +196,4 @@ with tf.Session() as sess:
         import matplotlib.pyplot as plt
 
         plt.plot(losses['train'], label='Training loss')
-        plt.legend()
-        _ = plt.ylim ()
-
-    print(gen_poetry(prime_word='白日依山尽', top_n=10, rule=5, sentence_lines=8))
+        plt.show()
