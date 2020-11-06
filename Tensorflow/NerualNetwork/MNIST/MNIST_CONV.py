@@ -54,8 +54,6 @@ with tf.variable_scope('acc'):
 tf.summary.scalar('loss', loss)
 tf.summary.scalar('accuracy', accuracy)
 
-tf.global_variables_initializer()
-
 init_op = tf.global_variables_initializer()
 
 merged = tf.summary.merge_all()
